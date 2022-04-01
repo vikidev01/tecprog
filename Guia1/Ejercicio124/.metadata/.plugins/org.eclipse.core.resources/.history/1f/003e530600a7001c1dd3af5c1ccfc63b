@@ -1,0 +1,17 @@
+package holaMundo;
+
+
+public class HolaMundo {
+	public static void main(String[] args) {
+		System.out.print("Hola Santa Fe");
+		
+		Persona yo = new Persona( "Victoria", 41007468);
+		System.out.println(yo.MostrarNombre());
+		System.out.print(yo.MostrarDocu());
+		
+		
+	}
+	
+	
+}
+

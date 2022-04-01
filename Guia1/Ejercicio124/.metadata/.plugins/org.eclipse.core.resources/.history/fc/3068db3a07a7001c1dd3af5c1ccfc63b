@@ -1,0 +1,16 @@
+package holaMundo;
+public class Persona {
+	private String nombre;
+	private Integer documento;	
+	
+	public Persona(String nombre, Integer documento) {
+		this.nombre=nombre;
+		this.documento=documento;
+	}
+	public String MostrarNombre() {
+		return this.nombre;
+	}
+	public Integer MostrarDocu() {
+		return this.documento;
+	}
+}

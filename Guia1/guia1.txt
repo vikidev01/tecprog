@@ -1,0 +1,330 @@
+EJERCICIO 1, 2, 4
+
+package helloWord;
+
+import java.util.Calendar;
+
+public class Persona {
+	private String nombre;
+	private String apellido;
+	private Integer documento;
+	private Calendar fechaNacimiento;
+	private String password;
+	
+	public Persona(String nombre, String apellido, Integer documento, String password, Calendar fechaNacimiento) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.documento = documento;
+		this.fechaNacimiento = fechaNacimiento;
+		this.password =StringMD.getStringMessageDigest(password, StringMD.SHA256);
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}
+	
+	
+	public String getNombre() {
+		return this.nombre;
+	}
+	public String getApellido() {
+		return this.apellido;
+	}
+	public Integer getDocumento() {
+		return this.documento;
+	}
+	
+	public Calendar getFechaNacimiento() {
+		return this.fechaNacimiento;
+	}
+	
+	public Integer getEdad() {
+	
+		
+		Calendar today = Calendar.getInstance();
+		
+		
+		Integer dayT = today.get(Calendar.DAY_OF_MONTH);
+		Integer monthT = today.get(Calendar.MONTH);
+		Integer yearT = today.get(Calendar.YEAR);
+		
+		Integer day = this.fechaNacimiento.get(Calendar.DAY_OF_MONTH);
+		Integer month = this.fechaNacimiento.get(Calendar.MONTH);
+		Integer year = this.fechaNacimiento.get(Calendar.YEAR);
+		
+	
+		
+		if(monthT >= month && day >= dayT) {
+			return yearT - year;
+		} 
+		
+		return yearT - year -1; 
+	}
+	
+	public String getDia() {
+		
+		switch (this.fechaNacimiento.get(Calendar.DAY_OF_MONTH)) {
+		
+	}
+	public mostrarPersona(Persona persona) {
+		System.out.println (this.getNombre() + ", "+
+							this.getApellido()+ ": "+
+							this.getEdad()+
+							this.getDia() );
+	}
+	
+	public String validarPassword(String clave) {
+		// TODO Auto-generated method stub
+		String clave_test = StringMD.getStringMessageDigest(clave StringMD.SHA256);
+		if(this.password.equals(clave_test)) {
+			return "Verdadero";
+		} else {
+			return "Falso";
+		}
+		
+	}
+}
+
+package holaWord;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+public class StringMD {
+	//algoritmos
+    public static String MD2 = "MD2";
+    public static String MD5 = "MD5";
+    public static String SHA1 = "SHA-1";
+    public static String SHA256 = "SHA-256";
+    public static String SHA384 = "SHA-384";
+    public static String SHA512 = "SHA-512";
+    
+    /***
+     * Convierte un arreglo de bytes a String usando valores hexadecimales
+     * @param digest arreglo de bytes a convertir
+     * @return String creado a partir de <code>digest</code>
+     */
+    private static String toHexadecimal(byte[] digest){
+        String hash = "";
+        for(byte aux : digest) {
+            int b = aux & 0xff;
+            if (Integer.toHexString(b).length() == 1) hash += "0";
+            hash += Integer.toHexString(b);
+        }
+        return hash;
+    }
+    /***
+     * Encripta un mensaje de texto mediante algoritmo de resumen de mensaje.
+     * @param message texto a encriptar
+     * @param algorithm algoritmo de encriptación, puede ser: MD2,MD5,SHA-1,SHA-256,SHA-384,SHA-512
+     * @return mensaje encriptado
+     */
+    public static String getStringMessageDigest(String message, String algorithm){
+        byte[] digest = null;
+        byte[] buffer = message.getBytes();
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
+            messageDigest.reset();
+            messageDigest.update(buffer);
+            digest = messageDigest.digest();
+        } catch (NoSuchAlgorithmException ex) {
+            System.out.println("Error creando Digest");
+        }
+        return toHexadecimal(digest);
+    }
+    
+}
+
+package helloWord;
+
+import java.util.Calendar;
+
+public class HelloWord {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Calendar fn = Calendar.getInstance();
+		fn.set(1998, 01, 22);
+		
+		Persona persona = new Persona("Victoria","Galarza", 41007468,"pass",  fn);
+		
+		mostrarPersona(persona);
+		
+		
+		System.out.println(persona.validarPassword("pass"););
+	
+	}
+
+}
+EJERCICIO 3
+package ejercicio1tp1;
+
+import java.util.ArrayList;
+
+public class Facultad {
+	private String nombre;
+	private ArrayList<Carrera> cCarreras;
+	
+	public Facultad(String nombre) {
+		this.nombre = nombre;
+		this.cCarreras= new ArrayList<Carrera> ();
+	}
+	public void addCarrera(Carrera ocarrera) {
+		cCarreras.add(ocarrera);
+	}
+	public String toString() {
+		return "Facultad: " + this.nombre;
+	}
+	public void mostrarCarrerasyAlumnos() {
+		for(int i = 0; i < cCarreras.size(); i++) {
+            System.out.println(cCarreras.get(i).toString());
+        }
+	}
+	
+}
+package ejercicio1tp1;
+
+import java.util.ArrayList;
+
+public class Carrera {
+	private String nombre;
+	private ArrayList<Alumno> cAlumnos;
+	
+	public Carrera(String nombre) {
+		this.nombre = nombre;
+		this.cAlumnos = new ArrayList<Alumno>();
+	}
+	public void addAlumno(Alumno oalumno) {
+		cAlumnos.add(oalumno);
+	}
+	
+	public String toString() {
+		return "Carrera: "+ this.nombre;
+	}
+	
+	public void MostrarAlumnos() {
+		for(int i = 0; i < cAlumnos.size(); i++) {
+            System.out.println(cAlumnos.get(i).toString());
+        }
+	}
+	
+	
+	
+}
+package ejercicio1tp1;
+
+import java.util.Calendar;
+
+public class Alumno {
+	private Calendar fechaIns;
+	private Persona persona;
+	private Carrera carrera;
+	
+	public Alumno(Calendar fechaIns, Persona persona, Carrera ocarrera) {
+		
+		if (fechaIns == null || persona == null || carrera == null) {
+			throw new RuntimeException("Parametros invalidos");
+		}
+		
+		this.fechaIns = fechaIns;
+		this.persona = persona;
+		this.carrera = ocarrera;
+		
+		persona.addAlumno(this);
+		carrera.addAlumno(this);
+	}
+	
+	public String toString() {
+	
+		return persona.toString()+ " - " + 
+			this.fechaIns.get(Calendar.DAY_OF_MONTH)+ "/" + 
+			this.fechaIns.get(Calendar.MONTH)+ "/" +
+			this.fechaIns.get(Calendar.YEAR);
+	}
+	
+	
+}
+package ejercicio1tp1;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+
+public class Persona {
+	private String nombre;
+	private Integer documento;
+	private Calendar fechaNacimiento;
+	private ArrayList<Alumno> cAlumnos;
+	
+	
+	public Persona(String nombre, Integer documento, Calendar fechaNacimiento) {
+		this.nombre = nombre;
+		this.documento = documento;
+		this.fechaNacimiento = fechaNacimiento;
+		this.cAlumnos = new ArrayList<Alumno> ();
+	}
+	public void addAlumno(Alumno oalumno) {
+		cAlumnos.add(oalumno);
+	}
+	
+	
+	public String getNombre() {
+		return this.nombre;
+	}
+	
+	public Integer getDocumento() {
+		return this.documento;
+	}
+	
+	public Calendar getFechaNacimiento() {
+		return this.fechaNacimiento;
+	}
+	
+	public Integer getEdad() {
+		Calendar today = Calendar.getInstance();
+		
+		
+		Integer dayT = today.get(Calendar.DAY_OF_MONTH);
+		Integer monthT = today.get(Calendar.MONTH);
+		Integer yearT = today.get(Calendar.YEAR);
+		
+		Integer day = this.fechaNacimiento.get(Calendar.DAY_OF_MONTH);
+		Integer month = this.fechaNacimiento.get(Calendar.MONTH);
+		Integer year = this.fechaNacimiento.get(Calendar.YEAR);
+		
+	
+		
+		if(monthT >= month && day >= dayT) {
+			return yearT - year;
+		} 
+		
+		return yearT - year -1; 
+	}
+	}
+package ejercicio1tp1;
+
+import java.util.Calendar;
+
+public class main {
+
+	public static void main(String[] args) {
+		Facultad fich= new Facultad ("Facultad de Ingeniería y Ciencias Hídricas");
+		Carrera ii = new Carrera ("Ingeniería en Informática");
+		Calendar fechanac = Calendar.getInstance();
+		fechanac.set(1998, 01, 22);
+		Persona mia = new Persona ("Victoria Galarza", 41007468, fechanac );
+		Calendar ins = Calendar.getInstance();
+		ins.set(2019, 02, 12);
+		Alumno yo = new Alumno(ins, mia, ii);
+		
+		ii.addAlumno(yo);
+		fich.addCarrera(ii);
+		
+		
+		System.out.println(fich.toString());
+		System.out.println(ii.toString());
+		System.out.println(yo.toString());
+	
+	}
+
+}

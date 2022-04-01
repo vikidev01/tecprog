@@ -1,0 +1,18 @@
+package holaMundo;
+
+import java.util.Calendar;
+
+public class HolaMundo {
+	public static void main(String[] args) {
+		System.out.println("Hola Santa Fe");
+		
+		Persona yo = new Persona( "Victoria", 41007468, Calendar.getInstance());
+		System.out.println(yo.MostrarNombre());
+		System.out.print(yo.MostrarDocu());
+		System.out.print(
+		
+	}
+	
+	
+}
+

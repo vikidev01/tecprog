@@ -1,0 +1,23 @@
+package helloWord;
+
+import java.util.Calendar;
+
+public class HelloWord {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Calendar fn = Calendar.getInstance();
+		fn.set(1999, 9, 19);
+		
+		Persona persona = new Persona("vik", 41007468,pass,  fn);
+		
+		System.out.println(persona.getNombre());
+		System.out.println(persona.getDocumento());
+		System.out.println(persona.getEdad());
+		System.out.println(persona.getPassword());
+		
+		persona.validarPassword("clave");
+	}
+
+}

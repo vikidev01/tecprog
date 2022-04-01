@@ -1,0 +1,36 @@
+package holaMundo;
+
+import java.util.Calendar;
+
+public class Persona {
+	
+	private String nombre;
+	private Integer documento;	
+	private Calendar fechanacimiento1;
+	private Integer edad;
+	
+	public Persona(String nombre, Integer documento, Calendar fechanacimiento) {
+		this.nombre = nombre;
+		this.documento = documento;
+		
+		Calendar fechanacimiento1 = Calendar.getInstance();
+		fechanacimiento1.set(Calendar.YEAR,1998);
+		fechanacimiento1.set(Calendar.MONTH,01);
+		fechanacimiento1.set(Calendar.DATE, 22);
+		
+		
+	
+	}
+	public String MostrarNombre() {
+		return this.nombre;
+	}
+	public Integer MostrarDocu() {
+		return this.documento;
+	}
+	public Integer MostrarEdad() {
+		Calendar fechahoy = Calendar.getInstance();
+		edad =	fechahoy.get(Calendar.YEAR) - fechanacimiento1.get(Calendar.YEAR);
+		return edad;
+	}
+
+}
